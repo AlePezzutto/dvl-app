@@ -92,4 +92,13 @@ public class StatService implements MxService {
 
 		return $(Stats.values()).filter(stat -> stat.getAction().toLowerCase().contains(id.toLowerCase())).o;
 	}
+	
+	@GetMapping("/like/{name}")
+	public Iterable<Stat> getLikeByName(@RequestParam Map<String, String> params, @RequestParam String name) {
+		if ($(name).isBlank())
+			return get(params);
+
+		return $(Stats.values()).filter(stat -> stat.getAction().toLowerCase().contains(name.toLowerCase())).o;
+	}
+	
 }

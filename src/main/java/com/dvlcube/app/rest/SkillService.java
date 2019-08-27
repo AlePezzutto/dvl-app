@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import com.dvlcube.app.interfaces.MenuItem;
 import com.dvlcube.app.jpa.repo.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
+import com.dvlcube.utils.annotations.sql.Like;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 
 /**
@@ -39,7 +42,7 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	@Override
 	@GetMapping
 	public Iterable<SkillBean> get(@RequestParam Map<String, String> params) {
-		return repo.firstPage();
+		return repo.firstPage(new Sort(Direction.ASC,"name"));
 	}
 
 	@Override
@@ -47,7 +50,18 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	public Optional<SkillBean> get(@PathVariable Long id) {
 		return repo.findById(id);
 	}
+	
+	//@Override
+	@GetMapping("/name/{name}")
+	public SkillBean getByName(@PathVariable String name) {
+		return repo.findByName(name);
+	}
 
+	@GetMapping("/exists/name/{name}")
+	public boolean existsName(@PathVariable String name) {
+		return repo.countByName(name) > 0 ? true : false; 
+	}
+	
 	@Override
 	@PostMapping
 	public MxRestResponse post(@Valid @RequestBody SkillBean body) {
@@ -79,8 +93,8 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	}
 
 	@GetMapping("/like")
-	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
-		return repo.findAllLike(id);
+	public Iterable<SkillBean> getLike(@RequestParam(required = true) String name) {
+		return repo.findAllLike(name);
 	}
 
 	@DeleteMapping("/{id}")

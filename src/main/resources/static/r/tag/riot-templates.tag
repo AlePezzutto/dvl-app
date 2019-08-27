@@ -89,7 +89,7 @@ this.state = {
     </div>
     <div class="footer-copyright">
         <div class="container">
-            dvl-core.it
+            Alexandre Pezzuto - dvl-core.it
         </div>
     </div>
 </footer>

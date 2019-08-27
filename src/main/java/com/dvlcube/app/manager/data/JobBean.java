@@ -1,7 +1,9 @@
 package com.dvlcube.app.manager.data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.Valid;
 
 import com.dvlcube.utils.interfaces.MxBean;
 import com.dvlcube.utils.interfaces.Nameable;
@@ -16,6 +18,9 @@ public class JobBean implements MxBean<Long>, Nameable {
 
 	@Id
 	private Long id;
+	
+	@Valid
+	@Column(unique = true)
 	private String name;
 	private Integer max;
 

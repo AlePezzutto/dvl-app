@@ -39,4 +39,11 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>dvl-core</name>
+			<type>2</type>
+			<location>/home/pepper/Work/workspaces/testes/dvl/dvl-core</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.dvlcube.utils.annotations.sql.Like;
 import com.dvlcube.utils.interfaces.MxBean;
 import com.dvlcube.utils.interfaces.Nameable;
 import com.dvlcube.utils.interfaces.Presentable;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
+@Like
 public class SkillBean implements Nameable, MxBean<Long>, Presentable {
 	private static final long serialVersionUID = 1L;
 	@Id
